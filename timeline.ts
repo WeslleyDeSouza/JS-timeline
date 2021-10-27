@@ -2,7 +2,7 @@
 class TimeLineCollusionRanger{
 
     static triggerPoint = {
-        height:50,
+        height:90,
         top:200
     }
 
@@ -12,19 +12,23 @@ class TimeLineCollusionRanger{
         prev:<TimelineItem|null>null
     }
 
+    constructor(t:Timeline) {
+        this.drawRanger()
+    }
+
     protected drawRanger(){
         if(document.querySelector('.timeline-ranger-helper'))return;
         const $div = document.createElement('div');
         const points = TimeLineCollusionRanger.triggerPoint
-        $div.innerHTML = `<div style="opacity: 0.8;position: fixed;top: ${points.top}px;height: ${points.height}px;width: 100%;background: #919191" class="timeline-ranger-helper"></div>`
+        $div.innerHTML = `<div style="opacity: 0.1;position: fixed;top: ${points.top}px;height: ${points.height}px;width: 100%;background: #919191" class="timeline-ranger-helper"></div>`
         document.body.appendChild($div);
     }
 
-    constructor(t:Timeline) {
-        this.drawRanger();
-    }
-
-    itemIsInsideRange(item:TimelineItem,currentPostY:number){
+    /**
+     * Verify is item is inside range
+     * @item <TimelineItem>
+     * */
+    itemIsInsideRange(item:TimelineItem){
 
         const range         = TimeLineCollusionRanger;
 
@@ -38,19 +42,51 @@ class TimeLineCollusionRanger{
         }
 
     }
+
+    /**
+     * Verify is item is inside browser viewport
+     * @item <TimelineItem>
+     * @setValue saves the value to the pased item
+     * */
+    itemIsInView(item:TimelineItem, setValue = true){
+        const { top,height } = (<HTMLElement>item.getParentElement()).getBoundingClientRect();
+
+
+        if ( setValue ){
+            item.isInView =  ( top ) < (window.innerHeight ) &&  ( top +height ) >= 0;
+            return item.isInView;
+        }else {
+            return top < ( window.innerHeight ) &&  ( top + height ) >= 0;
+        }
+    }
 }
 
 class TimelineItem{
+
+    /* Is the first child element from the container  */
+    isFirst = false;
+
+    /* Is betweeen window height and 0 */
+    isInView = false;
 
     isActivated = true
 
     state = false;
 
     constructor(private $item:HTMLElement) {
+        this.initListeners();
+        this.isFirst = !$item.parentElement?.previousElementSibling;
+    }
+
+    get element():HTMLElement{
+        return this.$item
+    }
+
+    initListeners(){
         this.$item.ontransitionend = (ev) => {
-            this.isActivated = $item.classList.contains('active');
+            this.isActivated = this.$item.classList.contains('active');
             if(!this.state && this.isActivated){
-                $item.classList.remove('active')
+                this.$item.classList.remove('active')
             }
         }
     }
@@ -86,22 +122,30 @@ class Timeline {
     protected inti(){
 
         //Todo: wait till dom is ready
+        this.initContainer();
 
+        this.initItems();
+
+        this.initListeners();
+    }
+
+    private initContainer(){
         if( typeof (<any>this.$containerElement )=== 'string'){
             this.$containerElement = document.querySelector(<any>this.$containerElement)
         }
 
         if(! this.$containerElement ) throw new Error('DomElementNotFound: Container not found');
+    }
 
-
+    /**
+     * Initialise all Items with the class<TimelineItem>
+     * */
+    private initItems(){
         this.$containerElement.items = [...
             this.$containerElement.querySelectorAll(
                 Timeline.itemSelector
             )
-        ].map(v => new TimelineItem(v))
-
-        this.initListeners()
-
+        ].map(v => new TimelineItem(v));
     }
 
     /**
@@ -117,17 +161,30 @@ class Timeline {
      * Handle Scroll event
      * */
     protected handleScroll(ev:Event){
-       const scrollPositionY = document.documentElement.scrollTop;
+        const scrollPositionY = document.documentElement.scrollTop;
 
-       this.lineRanger.collusionsMapper.hasCollusion = false
+       this.lineRanger.collusionsMapper.hasCollusion = false;
+        let found = null;
        for(let i = 0; i<this.$containerElement.items.length;i++){
            let item = this.$containerElement.items[i];
-           if(this.lineRanger.itemIsInsideRange(item ,scrollPositionY)){
+
+           /*
+           * canTriggerSlideContent
+           * */
+           if( this.canTriggerSlideContent( item  ) ) this.triggerSlideContent(item)
+
+
+           if( found ){
+               found--;
+               if(  found === 0)break;
+           }
+           else if( this.lineRanger.itemIsInsideRange( item )){
                this.lineRanger.collusionsMapper.hasCollusion = true
                this.lineRanger.collusionsMapper.prev    = this.lineRanger.collusionsMapper.current
                this.lineRanger.collusionsMapper.current = item
-               break;
+               found = 20;
            }
+
        }
 
        if(!this.lineRanger.collusionsMapper.hasCollusion){
@@ -138,10 +195,19 @@ class Timeline {
        this.setItemClasses()
     }
 
+    protected canTriggerSlideContent(item:TimelineItem):boolean {
+        return (item.isFirst && !item.isInView && this.lineRanger.itemIsInView(item,true));
+    }
+
+    protected triggerSlideContent(item:TimelineItem):any {
+        return item.getParentElement()?.parentElement?.parentElement?.querySelector('.contentContainer')?.classList.add('visible')
+    }
+
+
     setItemClasses(){
        const { prev , current } = this.lineRanger.collusionsMapper;
-        prev    ? prev.setState(false)      :null;
-        current ? current.setState(true)    :null;
+        prev    ? prev.setState(false)    : null;
+        current ? current.setState(true)  : null;
     }
 
 }
