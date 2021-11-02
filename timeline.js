@@ -126,6 +126,7 @@ var Timeline = /** @class */ (function () {
      * */
     Timeline.prototype.initItems = function () {
         this.$containerElement.items = __spreadArray([], this.$containerElement.querySelectorAll(Timeline.itemSelector)).map(function (v) { return new TimelineItem(v); });
+        this.setItemColor();
     };
     /**
      * Adding Dom Listeners
@@ -178,6 +179,72 @@ var Timeline = /** @class */ (function () {
         prev ? prev.setState(false) : null;
         current ? current.setState(true) : null;
     };
+    Timeline.prototype.setItemColor = function () {
+        var red = 1;
+        var green = 107;
+        var blue = 183;
+        var circleCounter = 0;
+        var rowCounter = 0;
+        this.$containerElement.items.map(function (item) {
+            if (circleCounter % 9 == 0)
+                rowCounter++;
+            circleCounter++;
+            switch (rowCounter) {
+                case 9:
+                    rowCounter = 1;
+                    break;
+                case 1:
+                    red += 14.33;
+                    green -= 7.55;
+                    blue -= 11.44;
+                    break;
+                case 2:
+                    red += 10.44;
+                    green += 3.77;
+                    blue -= 6.77;
+                    break;
+                case 3:
+                    red += 2.88;
+                    green += 13.11;
+                    blue -= 2.11;
+                    break;
+                case 4:
+                    red -= 10.11;
+                    green += 0.33;
+                    blue += 0.33;
+                    break;
+                case 5:
+                    red -= 17.55;
+                    green -= 7.22;
+                    blue -= 0.33;
+                    break;
+                case 6:
+                    red += 5.11;
+                    green -= 3.77;
+                    blue += 5.22;
+                    break;
+                case 7:
+                    red += 4.77;
+                    green += 13.55;
+                    blue += 25.44;
+                    break;
+                case 8:
+                    red -= 8.22;
+                    green -= 13;
+                    blue -= 9.33;
+                    break;
+                default:
+            }
+            var redRounded = parseInt(red);
+            var greenRounded = parseInt(green);
+            var blueRounded = parseInt(blue);
+            item.element.style.backgroundColor = ("rgb(" + redRounded + "," + greenRounded + "," + blueRounded + ")");
+        });
+    };
     Timeline.itemSelector = '.bubble';
     return Timeline;
 }());
+function handleCircleColor() {
+    if (window.matchMedia("(min-width: 768px)").matches) {
+    }
+}

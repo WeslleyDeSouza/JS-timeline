@@ -41,10 +41,19 @@
         .bubble{
             position: relative;
             transition: transform 350ms;
-            background: #cfabf3;
             width:  50px;
             height: 50px;
             border-radius: 50%;
+        }
+
+        .bubble span{
+            color: white;
+            position: relative;
+            z-index: 1;
+            font-size: 75%!important;
+        }
+        .bubble-container:not(:nth-child(1)) span{
+            opacity: 0;
         }
 
         .bubble-container:nth-child(3) .bubble{
@@ -146,14 +155,15 @@
 
 
 
-        .active.bubble{
+       .bubble.active{
             transform: scale(1.5);
+        }
+        .bubble.active span{
+            opacity: 1;
         }
 
         .bubble-inner{
-            display: initial;
             opacity: 0;
-            background: #cfabf3;
             width: 100%;
             height: 100%;
             position: absolute;
@@ -163,9 +173,11 @@
             border: 0px solid white;
             box-sizing: border-box;
             transition: opacity,border 300ms;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .active .bubble-inner{
-            display: initial;
             opacity: 1;
             border: 2px solid white;
         }
@@ -219,57 +231,66 @@
                 <div style="width: 20%" class="start-right">
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
 
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -366,57 +387,66 @@
                 <div style="width: 20%" class="start-right">
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
 
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -513,57 +543,66 @@
                 <div style="width: 20%" class="start-right">
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
 
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                     <div class="bubble-container">
                         <div class="bubble">
-                            <span style="z-index: 1">2018</span>
-                            <div class="bubble-inner"></div>
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
                         </div>
                     </div>
                 </div>
