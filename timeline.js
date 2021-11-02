@@ -14,11 +14,11 @@ var TimeLineCollusionRanger = /** @class */ (function () {
         this.drawRanger();
     }
     TimeLineCollusionRanger.prototype.drawRanger = function () {
-        if (document.querySelector('.timeline-ranger-helper'))
+        if (!TimeLineCollusionRanger.triggerPoint.drawRanger || document.querySelector('.timeline-ranger-helper'))
             return;
         var $div = document.createElement('div');
         var points = TimeLineCollusionRanger.triggerPoint;
-        $div.innerHTML = "<div style=\"opacity: 0.1;position: fixed;top: " + points.top + "px;height: " + points.height + "px;width: 100%;background: #919191\" class=\"timeline-ranger-helper\"></div>";
+        $div.innerHTML = "<div style=\"opacity: 0.1;position: fixed;top: " + points.top + "px;height: " + points.height + "px;width: 100%;background: #ff2b2b\" class=\"timeline-ranger-helper\"></div>";
         document.body.appendChild($div);
     };
     /**
@@ -52,7 +52,8 @@ var TimeLineCollusionRanger = /** @class */ (function () {
     };
     TimeLineCollusionRanger.triggerPoint = {
         height: 90,
-        top: 200
+        top: 200,
+        drawRanger: false,
     };
     return TimeLineCollusionRanger;
 }());

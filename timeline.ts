@@ -3,7 +3,8 @@ class TimeLineCollusionRanger{
 
     static triggerPoint = {
         height:90,
-        top:200
+        top:200,
+        drawRanger:false,
     }
 
     collusionsMapper = {
@@ -17,10 +18,10 @@ class TimeLineCollusionRanger{
     }
 
     protected drawRanger(){
-        if(document.querySelector('.timeline-ranger-helper'))return;
+        if(!TimeLineCollusionRanger.triggerPoint.drawRanger || document.querySelector('.timeline-ranger-helper'))return;
         const $div = document.createElement('div');
         const points = TimeLineCollusionRanger.triggerPoint
-        $div.innerHTML = `<div style="opacity: 0.1;position: fixed;top: ${points.top}px;height: ${points.height}px;width: 100%;background: #919191" class="timeline-ranger-helper"></div>`
+        $div.innerHTML = `<div style="opacity: 0.1;position: fixed;top: ${points.top}px;height: ${points.height}px;width: 100%;background: #ff2b2b" class="timeline-ranger-helper"></div>`
         document.body.appendChild($div);
     }
 
