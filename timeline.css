@@ -287,3 +287,16 @@
         width: 90%;
     }
 }
+@media (max-width: 390px) {
+    .timeline-sidebar{
+        width: 70%;
+        order: 2;
+    }
+    .bubble{
+        width: 30px;
+        height: 30px;
+    }
+    .bubble span{
+        font-size: 50%!important;
+    }
+}

@@ -1,8 +1,10 @@
 class TimeLineCollusionRanger {
   static triggerPoint = {
     height: 90,
-    top: 200,
-    drawRanger: false,
+    top: (()=>{
+      return window.innerWidth < 690 ? 500 : 200
+    })(),
+    drawRanger: true,
   };
 
   collusionsMapper = {
@@ -13,6 +15,7 @@ class TimeLineCollusionRanger {
 
   constructor(t: Timeline) {
     this.drawRanger();
+    console.log(TimeLineCollusionRanger.triggerPoint.top)
   }
 
   protected drawRanger() {
