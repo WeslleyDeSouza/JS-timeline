@@ -2,7 +2,7 @@ class TimeLineCollusionRanger {
   static triggerPoint = {
     height: 90,
     top: (()=>{
-      return window.innerWidth < 690 ? 500 : 200
+      return window.innerWidth < 690 ? 500 : 400
     })(),
     drawRanger: false,
   };
