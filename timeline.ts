@@ -4,7 +4,7 @@ class TimeLineCollusionRanger {
     top: (()=>{
       return window.innerWidth < 690 ? 500 : 200
     })(),
-    drawRanger: true,
+    drawRanger: false,
   };
 
   collusionsMapper = {
