@@ -11,7 +11,6 @@
             display: flex;
             justify-content: center;
         }
-
         .full-page{
             min-height: 100vh;
             width: 100%
@@ -22,19 +21,13 @@
             transition: transform 1s;
         }
 
-        .contentLeft .contentContainer:not(.visible){
+        .contentLeft  .contentContainer:not(.visible){
             transform: translate3d(-100%, 0px, 0px ) scale(.5);
         }
         .contentRight .contentContainer:not(.visible){
             transform: translate3d(100%, 0px, 0px ) scale(.5);
         }
 
-        .bubble-container{
-            margin: 20px;
-            margin-bottom: 30px;
-
-            text-align: center;
-        }
 
         .bubble{
             position: relative;
@@ -44,17 +37,38 @@
             border-radius: 50%;
             box-shadow: 0px 0px 15px 1px rgb(0 0 0 / 5%);
         }
-
         .bubble span{
             color: white;
             position: relative;
             z-index: 1;
             font-size: 75%!important;
         }
+
+        .bubble-container{
+            margin: 20px;
+            margin-bottom: 30px;
+
+            text-align: center;
+        }
         .bubble-container:not(:nth-child(1)) span{
             opacity: 0;
         }
+        .bubble-container:nth-child(n+4) span{
+            font-size: 50%!important;
+        }
+        .bubble-container:nth-child(n+6) span{
+            font-size: 40%!important;
+        }
+        .bubble-container:nth-child(n+7) span{
+            font-size: 50%!important;
+        }
+        .bubble-container:nth-child(n+8) span{
+            font-size: 60%!important;
+        }
 
+        .bubble-container:nth-child(1){
+            margin-top: 5px;
+        }
         .bubble-container:nth-child(3) .bubble{
             width: 40px;
             height:40px;
@@ -113,48 +127,35 @@
             margin-left: 11%;
         }
 
-        /*Todos*/
         .start-left .bubble-container:nth-child(9) .bubble {
             margin-left: 98%;
         }
-
         .start-left .bubble-container:nth-child(8) .bubble {
             margin-left: 93%;
         }
-
-
         .start-left .bubble-container:nth-child(7) .bubble {
             margin-left: 80%;
         }
-
         .start-left .bubble-container:nth-child(6) .bubble {
             margin-left: 65%;
         }
-
         .start-left .bubble-container:nth-child(5) .bubble {
             margin-left: 52%;
         }
-
         .start-left .bubble-container:nth-child(4) .bubble {
             margin-left: 37%;
         }
-
         .start-left .bubble-container:nth-child(3) .bubble {
             margin-left: 26%;
         }
-
         .start-left .bubble-container:nth-child(2) .bubble {
             margin-left: 15%;
         }
-
         .start-left .bubble-container:nth-child(1) .bubble {
             margin-left: 8%;
         }
 
-
-
-
-       .bubble.active{
+        .bubble.active{
             transform: scale(1.5);
         }
         .bubble.active span{
@@ -182,6 +183,73 @@
             user-select: none;
         }
 
+        .timeline-item{
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .contentRight .timeline-item{
+            flex-direction: row-reverse;
+        }
+
+        .timeline-item-heading{
+            position: relative;
+            height: 40px;
+            width: 100%;
+        }
+        .timeline-item-heading h1,
+        .timeline-item-heading h2,
+        .timeline-item-heading h3{
+            margin: 0;
+            color: white;
+        }
+        .timeline-item-heading svg{
+            height: 40px;
+        }
+        .contentLeft .timeline-item-heading .timeline-item-heading--arrow-end{
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: translate(15.2px, 0px);
+        }
+        .contentRight .timeline-item-heading .timeline-item-heading--arrow-end{
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(-15.2px, 0px) rotate(180deg);
+        }
+        .timeline-item-heading .arrow{
+            opacity: 0.65;
+            width:  31px;
+            height: 32px;
+            z-index: -1;
+            position: absolute;
+        }
+        .contentLeft .timeline-item-heading .arrow {
+            transform: rotate(45deg);
+            bottom: -16px;
+            left: 7px;
+        }
+        .contentRight .timeline-item-heading .arrow {
+            transform: rotate(-45deg);
+            bottom: -16px;
+            right: 7px;
+        }
+
+        .timeline-item-content{
+            width: 80%;
+            background: white;
+            margin-left:  20px;
+            padding-left: 10px;
+            z-index: 1;
+            -webkit-box-shadow: 2px 2px 17px -3px rgb(97 97 97);
+            -moz-box-shadow: 2px 2px 17px -3px rgba(97,97,97,1);
+            box-shadow: 2px 2px 17px -3px rgb(97 97 97);
+        }
+        .contentRight .timeline-item-content{
+            margin-right:20px;
+            width: 80%;
+        }
 
     </style>
 </head>
@@ -204,35 +272,21 @@
                 <div style="width: 40%">
                     <div class="contentLeft">
                         <div class="contentContainer">
-                            <div class="titleDiv" style="background-color: rgb(15, 99, 171);">
-                                <h2>Gütsch Fäscht</h2>
-                                <!--ARROWS (LEFT)-->
-                                <!--1 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 1 visible" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 36" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,36 14,18 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--2 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 58.7" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,58.7 14,29.4 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--3 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 81.5" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,81.5 14,40.7 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--4 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 104.2" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,104.2 14,52.1 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--5 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 126.9" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,126.9 14,63.5 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <div class="arrow" style="background-color: rgb(15, 99, 171);"></div>
-                            </div>
-                            <div class="textBoxWhite ">
-                                <p></p><p>Mit einer Festwirtschaft, Musik, Tombola und vielen fröhlich gestimmten Besuchern durften wir am 29. September 2018 die Tore der&nbsp;Institution Barbara Keller für die Bevölkerung öffnen. Ein gelungenes Fest für Gross und Klein.</p>
-                                <p></p>
+                            <div class="timeline-item">
+                                <div class="timeline-item-heading" style="background-color: rgb(15 99 171);">
+                                    <h2>Gütsch Fäscht</h2>
 
+                                    <svg version="1.1" class="svgArrowCont 1 timeline-item-heading--arrow-end" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 36" xml:space="preserve">
+                                         <polygon class="svgArrow" points="0,36 14,18 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
+                                    </svg>
+
+                                    <div class="arrow" style="background-color: rgb(15, 99, 171);"></div>
+                                </div>
+                                <div class="timeline-item-content">
+                                    <p></p><p>Mit einer Festwirtschaft, Musik, Tombola und vielen fröhlich gestimmten Besuchern durften wir am 29. September 2018 die Tore der&nbsp;Institution Barbara Keller für die Bevölkerung öffnen. Ein gelungenes Fest für Gross und Klein.</p>
+                                    <p></p>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -281,6 +335,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="bubble-container">
                         <div class="bubble">
                             <div class="bubble-inner">
@@ -308,48 +363,90 @@
             <div class="d-flex">
                 <div style="width: 40%"></div>
                 <div class="start-left" style="width: 20%">
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div style="width: 40%">
                     <div class="contentRight">
                         <div class="contentContainer">
-                            <div class="titleDiv" style="background-color: rgb(15, 99, 171);">
-                                <h2>Gütsch Fäscht</h2>
-                                <!--ARROWS (LEFT)-->
-                                <!--1 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 1 visible" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 36" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,36 14,18 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--2 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 58.7" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,58.7 14,29.4 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--3 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 81.5" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,81.5 14,40.7 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--4 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 104.2" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,104.2 14,52.1 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--5 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 126.9" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,126.9 14,63.5 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <div class="arrow" style="background-color: rgb(15, 99, 171);"></div>
-                            </div>
-                            <div class="textBoxWhite ">
-                                <p></p><p>Mit einer Festwirtschaft, Musik, Tombola und vielen fröhlich gestimmten Besuchern durften wir am 29. September 2018 die Tore der&nbsp;Institution Barbara Keller für die Bevölkerung öffnen. Ein gelungenes Fest für Gross und Klein.</p>
-                                <p></p>
+                            <div class="timeline-item">
+                                <div class="timeline-item-heading" style="background-color: rgb(15 99 171);">
+                                    <h2>Gütsch Fäscht</h2>
 
+                                    <svg version="1.1" class="svgArrowCont 1 timeline-item-heading--arrow-end" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 36" xml:space="preserve">
+                                         <polygon class="svgArrow" points="0,36 14,18 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
+                                    </svg>
+
+                                    <div class="arrow" style="background-color: rgb(15, 99, 171);"></div>
+                                </div>
+                                <div class="timeline-item-content">
+                                    <p></p><p>Mit einer Festwirtschaft, Musik, Tombola und vielen fröhlich gestimmten Besuchern durften wir am 29. September 2018 die Tore der&nbsp;Institution Barbara Keller für die Bevölkerung öffnen. Ein gelungenes Fest für Gross und Klein.</p>
+                                    <p></p>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -360,35 +457,21 @@
                 <div style="width: 40%">
                     <div class="contentLeft">
                         <div class="contentContainer">
-                            <div class="titleDiv" style="background-color: rgb(15, 99, 171);">
-                                <h2>Gütsch Fäscht</h2>
-                                <!--ARROWS (LEFT)-->
-                                <!--1 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 1 visible" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 36" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,36 14,18 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--2 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 58.7" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,58.7 14,29.4 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--3 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 81.5" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,81.5 14,40.7 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--4 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 104.2" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,104.2 14,52.1 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--5 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 126.9" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,126.9 14,63.5 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <div class="arrow" style="background-color: rgb(15, 99, 171);"></div>
-                            </div>
-                            <div class="textBoxWhite ">
-                                <p></p><p>Mit einer Festwirtschaft, Musik, Tombola und vielen fröhlich gestimmten Besuchern durften wir am 29. September 2018 die Tore der&nbsp;Institution Barbara Keller für die Bevölkerung öffnen. Ein gelungenes Fest für Gross und Klein.</p>
-                                <p></p>
+                            <div class="timeline-item">
+                                <div class="timeline-item-heading" style="background-color: rgb(15 99 171);">
+                                    <h2>Gütsch Fäscht</h2>
 
+                                    <svg version="1.1" class="svgArrowCont 1 timeline-item-heading--arrow-end" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 36" xml:space="preserve">
+                                         <polygon class="svgArrow" points="0,36 14,18 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
+                                    </svg>
+
+                                    <div class="arrow" style="background-color: rgb(15, 99, 171);"></div>
+                                </div>
+                                <div class="timeline-item-content">
+                                    <p></p><p>Mit einer Festwirtschaft, Musik, Tombola und vielen fröhlich gestimmten Besuchern durften wir am 29. September 2018 die Tore der&nbsp;Institution Barbara Keller für die Bevölkerung öffnen. Ein gelungenes Fest für Gross und Klein.</p>
+                                    <p></p>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -437,6 +520,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="bubble-container">
                         <div class="bubble">
                             <div class="bubble-inner">
@@ -464,48 +548,90 @@
             <div class="d-flex">
                 <div style="width: 40%"></div>
                 <div class="start-left" style="width: 20%">
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
-                    <div class="bubble-container"> <div class="bubble"></div></div>
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bubble-container">
+                        <div class="bubble">
+                            <div class="bubble-inner">
+                                <span>2021</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div style="width: 40%">
                     <div class="contentRight">
                         <div class="contentContainer">
-                            <div class="titleDiv" style="background-color: rgb(15, 99, 171);">
-                                <h2>Gütsch Fäscht</h2>
-                                <!--ARROWS (LEFT)-->
-                                <!--1 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 1 visible" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 36" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,36 14,18 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--2 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 58.7" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,58.7 14,29.4 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--3 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 81.5" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,81.5 14,40.7 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--4 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 104.2" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,104.2 14,52.1 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--5 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 126.9" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,126.9 14,63.5 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <div class="arrow" style="background-color: rgb(15, 99, 171);"></div>
-                            </div>
-                            <div class="textBoxWhite ">
-                                <p></p><p>Mit einer Festwirtschaft, Musik, Tombola und vielen fröhlich gestimmten Besuchern durften wir am 29. September 2018 die Tore der&nbsp;Institution Barbara Keller für die Bevölkerung öffnen. Ein gelungenes Fest für Gross und Klein.</p>
-                                <p></p>
+                            <div class="timeline-item">
+                                <div class="timeline-item-heading" style="background-color: rgb(15 99 171);">
+                                    <h2>Gütsch Fäscht</h2>
 
+                                    <svg version="1.1" class="svgArrowCont 1 timeline-item-heading--arrow-end" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 36" xml:space="preserve">
+                                         <polygon class="svgArrow" points="0,36 14,18 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
+                                    </svg>
+
+                                    <div class="arrow" style="background-color: rgb(15, 99, 171);"></div>
+                                </div>
+                                <div class="timeline-item-content">
+                                    <p></p><p>Mit einer Festwirtschaft, Musik, Tombola und vielen fröhlich gestimmten Besuchern durften wir am 29. September 2018 die Tore der&nbsp;Institution Barbara Keller für die Bevölkerung öffnen. Ein gelungenes Fest für Gross und Klein.</p>
+                                    <p></p>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -516,35 +642,21 @@
                 <div style="width: 40%">
                     <div class="contentLeft">
                         <div class="contentContainer">
-                            <div class="titleDiv" style="background-color: rgb(15, 99, 171);">
-                                <h2>Gütsch Fäscht</h2>
-                                <!--ARROWS (LEFT)-->
-                                <!--1 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 1 visible" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 36" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,36 14,18 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--2 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 58.7" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,58.7 14,29.4 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--3 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 81.5" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,81.5 14,40.7 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--4 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 104.2" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,104.2 14,52.1 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--5 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 126.9" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,126.9 14,63.5 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <div class="arrow" style="background-color: rgb(15, 99, 171);"></div>
-                            </div>
-                            <div class="textBoxWhite ">
-                                <p></p><p>Mit einer Festwirtschaft, Musik, Tombola und vielen fröhlich gestimmten Besuchern durften wir am 29. September 2018 die Tore der&nbsp;Institution Barbara Keller für die Bevölkerung öffnen. Ein gelungenes Fest für Gross und Klein.</p>
-                                <p></p>
+                            <div class="timeline-item">
+                                <div class="timeline-item-heading" style="background-color: rgb(15 99 171);">
+                                    <h2>Gütsch Fäscht</h2>
 
+                                    <svg version="1.1" class="svgArrowCont 1 timeline-item-heading--arrow-end" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 36" xml:space="preserve">
+                                         <polygon class="svgArrow" points="0,36 14,18 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
+                                    </svg>
+
+                                    <div class="arrow" style="background-color: rgb(15, 99, 171);"></div>
+                                </div>
+                                <div class="timeline-item-content">
+                                    <p></p><p>Mit einer Festwirtschaft, Musik, Tombola und vielen fröhlich gestimmten Besuchern durften wir am 29. September 2018 die Tore der&nbsp;Institution Barbara Keller für die Bevölkerung öffnen. Ein gelungenes Fest für Gross und Klein.</p>
+                                    <p></p>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -593,6 +705,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="bubble-container">
                         <div class="bubble">
                             <div class="bubble-inner">
@@ -633,35 +746,21 @@
                 <div style="width: 40%">
                     <div class="contentRight">
                         <div class="contentContainer">
-                            <div class="titleDiv" style="background-color: rgb(15, 99, 171);">
-                                <h2>Gütsch Fäscht</h2>
-                                <!--ARROWS (LEFT)-->
-                                <!--1 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 1 visible" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 36" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,36 14,18 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--2 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 58.7" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,58.7 14,29.4 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--3 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 81.5" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,81.5 14,40.7 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--4 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 104.2" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,104.2 14,52.1 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <!--5 Zeilig-->
-                                <svg version="1.1" class="svgArrowCont 5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 126.9" style="height: 38px;" xml:space="preserve">
-                                    <polygon class="svgArrow" points="0,126.9 14,63.5 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
-                                </svg>
-                                <div class="arrow" style="background-color: rgb(15, 99, 171);"></div>
-                            </div>
-                            <div class="textBoxWhite ">
-                                <p></p><p>Mit einer Festwirtschaft, Musik, Tombola und vielen fröhlich gestimmten Besuchern durften wir am 29. September 2018 die Tore der&nbsp;Institution Barbara Keller für die Bevölkerung öffnen. Ein gelungenes Fest für Gross und Klein.</p>
-                                <p></p>
+                            <div class="timeline-item">
+                                <div class="timeline-item-heading" style="background-color: rgb(15 99 171);">
+                                    <h2>Gütsch Fäscht</h2>
 
+                                    <svg version="1.1" class="svgArrowCont 1 timeline-item-heading--arrow-end" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14 36" xml:space="preserve">
+                                         <polygon class="svgArrow" points="0,36 14,18 0,0 " style="fill: rgb(15, 99, 171);"></polygon>
+                                    </svg>
+
+                                    <div class="arrow" style="background-color: rgb(15, 99, 171);"></div>
+                                </div>
+                                <div class="timeline-item-content">
+                                    <p></p><p>Mit einer Festwirtschaft, Musik, Tombola und vielen fröhlich gestimmten Besuchern durften wir am 29. September 2018 die Tore der&nbsp;Institution Barbara Keller für die Bevölkerung öffnen. Ein gelungenes Fest für Gross und Klein.</p>
+                                    <p></p>
+
+                                </div>
                             </div>
                         </div>
                     </div>
