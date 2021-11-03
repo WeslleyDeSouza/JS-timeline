@@ -73,6 +73,11 @@ var TimelineItem = /** @class */ (function () {
         this.isInView = false;
         this.isActivated = true;
         this.state = false;
+        this.ON = {
+            click: {
+                image: function (self, ev) { return null; }
+            }
+        };
         this.initListeners();
         this.isFirst = !((_a = $item.parentElement) === null || _a === void 0 ? void 0 : _a.previousElementSibling);
     }
@@ -85,12 +90,23 @@ var TimelineItem = /** @class */ (function () {
     });
     TimelineItem.prototype.initListeners = function () {
         var _this = this;
+        // animation
         this.$item.ontransitionend = function (ev) {
             _this.isActivated = _this.$item.classList.contains("active");
             if (!_this.state && _this.isActivated) {
                 _this.$item.classList.remove("active");
             }
         };
+        // image
+        var parent = this.getParentElement();
+        var imgs = __spreadArray([], parent.parentElement.parentElement.querySelectorAll('img'));
+        imgs.map(function ($img) {
+            if (!$img.dataset.listener) {
+                $img.dataset.listener = $img.addEventListener('click', function (ev) {
+                    return _this.ON.click.image(_this, ev);
+                });
+            }
+        });
     };
     TimelineItem.prototype.getParentElement = function () {
         return this.$item.parentElement;
@@ -148,17 +164,19 @@ var Timeline = /** @class */ (function () {
      * */
     Timeline.prototype.initListeners = function () {
         var _this = this;
+        /**Global*/
         document.addEventListener("scroll", function (ev) { return _this.handleScroll(ev); });
         window.addEventListener('resize', function () {
             _this.setItemVisibility();
             _this.setItemColor();
         });
+        /*item based*/
+        //this.$containerElement.items.forEach((item:TimelineItem) => item.ON.click = (item:TimelineItem,ev:any) => this.handleItemImageClick(item,ev))
     };
     /**
      * Handle Scroll event
      * */
     Timeline.prototype.handleScroll = function (ev) {
-        var scrollPositionY = document.documentElement.scrollTop;
         this.lineRanger.collusionsMapper.hasCollusion = false;
         var found = null;
         for (var i = 0; i < this.$containerElement.items.length; i++) {
@@ -188,6 +206,8 @@ var Timeline = /** @class */ (function () {
         }
         this.setItemClasses();
     };
+    Timeline.prototype.handleItemImageClick = function (item, ev) {
+    };
     Timeline.prototype.canTriggerSlideContent = function (item) {
         return (item.isFirst && !item.isInView && this.lineRanger.itemIsInView(item, true));
     };
@@ -196,6 +216,7 @@ var Timeline = /** @class */ (function () {
         return (_d = (_c = (_b = (_a = item
             .getParentElement()) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.parentElement) === null || _c === void 0 ? void 0 : _c.querySelector(".contentContainer")) === null || _d === void 0 ? void 0 : _d.classList.add("visible");
     };
+    // item methods
     Timeline.prototype.setItemClasses = function () {
         var _a = this.lineRanger.collusionsMapper, prev = _a.prev, current = _a.current;
         prev ? prev.setState(false) : null;

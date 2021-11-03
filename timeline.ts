@@ -82,6 +82,7 @@ class TimelineItem {
   isActivated = true;
 
   state = false;
+  item: any;
 
   constructor(private $item: HTMLElement) {
     this.initListeners();
@@ -93,12 +94,27 @@ class TimelineItem {
   }
 
   initListeners() {
+
+    // animation
     this.$item.ontransitionend = (ev) => {
       this.isActivated = this.$item.classList.contains("active");
       if (!this.state && this.isActivated) {
         this.$item.classList.remove("active");
       }
     };
+
+    // image
+    const parent:any = this.getParentElement();
+    const imgs = [ ... parent.parentElement.parentElement.querySelectorAll('img')];
+    imgs.map(
+        $img =>{
+          if(!$img.dataset.listener){
+            $img.dataset.listener = $img.addEventListener('click', (ev:any)=>
+            this.ON.click.image(this,ev))
+          }
+        }
+
+    )
   }
 
   getParentElement() {
@@ -127,6 +143,12 @@ class TimelineItem {
       if (this.isActivated) {
         this.$item.classList.remove("active");
       }
+    }
+  }
+
+  ON = {
+    click:{
+      image:(self:TimelineItem,ev:any):any => null
     }
   }
 }
@@ -178,18 +200,22 @@ class Timeline {
    * Adding Dom Listeners
    * */
   protected initListeners() {
+
+    /**Global*/
     document.addEventListener("scroll", (ev) => this.handleScroll(ev));
-    window.addEventListener('resize',()=>{
+    window.addEventListener('resize',() => {
       this.setItemVisibility();
       this.setItemColor();
-    })
+    });
+
+    /*item based*/
+    //this.$containerElement.items.forEach((item:TimelineItem) => item.ON.click = (item:TimelineItem,ev:any) => this.handleItemImageClick(item,ev))
   }
 
   /**
    * Handle Scroll event
    * */
   protected handleScroll(ev: Event) {
-    const scrollPositionY = document.documentElement.scrollTop;
 
     this.lineRanger.collusionsMapper.hasCollusion = false;
     let found = null;
@@ -222,6 +248,10 @@ class Timeline {
     this.setItemClasses();
   }
 
+  protected handleItemImageClick(item:TimelineItem,ev:any){
+
+  }
+
   protected canTriggerSlideContent(item: TimelineItem): boolean {
     return (
       item.isFirst && !item.isInView && this.lineRanger.itemIsInView(item, true)
@@ -235,7 +265,9 @@ class Timeline {
       ?.classList.add("visible");
   }
 
-  setItemClasses() {
+  // item methods
+
+  public setItemClasses() {
     const { prev, current } = this.lineRanger.collusionsMapper;
     prev ? prev.setState(false) : null;
     current ? current.setState(true) : null;
@@ -244,7 +276,7 @@ class Timeline {
   /*
    * Hide elements on mobile view based on content height
    * */
-  setItemVisibility() {
+  public setItemVisibility() {
     if (window.innerWidth < 690) {
       let $lastContainer:HTMLElement;
       let sum = 0
@@ -294,7 +326,7 @@ class Timeline {
     }
   }
 
-  setItemColor() {
+  public setItemColor() {
     var red = 1;
     var green = 107;
     var blue = 183;
@@ -402,5 +434,3 @@ class Timeline {
     });
   }
 }
-
-
