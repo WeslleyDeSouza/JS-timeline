@@ -105,7 +105,7 @@ class TimelineItem {
 
     // image
     const parent:any = this.getParentElement();
-    const imgs = [ ... parent.parentElement.parentElement.querySelectorAll('img')];
+    const imgs = [ ... parent.parentElement.parentElement.querySelectorAll('.timeline-item-content--images img')];
     imgs.map(
         $img =>{
           if(!$img.dataset.listener){
@@ -148,7 +148,7 @@ class TimelineItem {
 
   ON = {
     click:{
-      image:(self:TimelineItem,ev:any):any => null
+      image:(item:TimelineItem,ev:any):any => null
     }
   }
 }
@@ -208,8 +208,10 @@ class Timeline {
       this.setItemColor();
     });
 
-    /*item based*/
-    //this.$containerElement.items.forEach((item:TimelineItem) => item.ON.click = (item:TimelineItem,ev:any) => this.handleItemImageClick(item,ev))
+    /*Item based*/
+    this.$containerElement.items.forEach((item:TimelineItem) =>
+        item.ON.click.image = (item:TimelineItem,ev:any) =>
+            this.handleItemImageClick(item,ev))
   }
 
   /**
@@ -249,7 +251,9 @@ class Timeline {
   }
 
   protected handleItemImageClick(item:TimelineItem,ev:any){
-
+    console.log(
+        item
+    )
   }
 
   protected canTriggerSlideContent(item: TimelineItem): boolean {

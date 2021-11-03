@@ -133,6 +133,7 @@
 }
 
 .timeline-item-content {
+  position: relative;
   width: 80%;
   background: white;
   margin-left: 20px;

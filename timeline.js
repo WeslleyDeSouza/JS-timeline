@@ -75,7 +75,7 @@ var TimelineItem = /** @class */ (function () {
         this.state = false;
         this.ON = {
             click: {
-                image: function (self, ev) { return null; }
+                image: function (item, ev) { return null; }
             }
         };
         this.initListeners();
@@ -99,7 +99,7 @@ var TimelineItem = /** @class */ (function () {
         };
         // image
         var parent = this.getParentElement();
-        var imgs = __spreadArray([], parent.parentElement.parentElement.querySelectorAll('img'));
+        var imgs = __spreadArray([], parent.parentElement.parentElement.querySelectorAll('.timeline-item-content--images img'));
         imgs.map(function ($img) {
             if (!$img.dataset.listener) {
                 $img.dataset.listener = $img.addEventListener('click', function (ev) {
@@ -170,8 +170,12 @@ var Timeline = /** @class */ (function () {
             _this.setItemVisibility();
             _this.setItemColor();
         });
-        /*item based*/
-        //this.$containerElement.items.forEach((item:TimelineItem) => item.ON.click = (item:TimelineItem,ev:any) => this.handleItemImageClick(item,ev))
+        /*Item based*/
+        this.$containerElement.items.forEach(function (item) {
+            return item.ON.click.image = function (item, ev) {
+                return _this.handleItemImageClick(item, ev);
+            };
+        });
     };
     /**
      * Handle Scroll event
@@ -207,6 +211,7 @@ var Timeline = /** @class */ (function () {
         this.setItemClasses();
     };
     Timeline.prototype.handleItemImageClick = function (item, ev) {
+        console.log(item);
     };
     Timeline.prototype.canTriggerSlideContent = function (item) {
         return (item.isFirst && !item.isInView && this.lineRanger.itemIsInView(item, true));
