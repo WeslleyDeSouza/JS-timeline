@@ -146,6 +146,7 @@ class Timeline {
     this.initListeners();
   }
 
+
   private initContainer() {
     if (typeof (<any>this.$containerElement) === "string") {
       this.$containerElement = document.querySelector(
@@ -165,6 +166,8 @@ class Timeline {
       ...this.$containerElement.querySelectorAll(Timeline.itemSelector),
     ].map((v) => new TimelineItem(v));
 
+    this.setItemVisibility();
+
     this.setItemColor();
   }
 
@@ -173,6 +176,10 @@ class Timeline {
    * */
   protected initListeners() {
     document.addEventListener("scroll", (ev) => this.handleScroll(ev));
+    window.addEventListener('resize',()=>{
+      this.setItemVisibility();
+      this.setItemColor();
+    })
   }
 
   /**
@@ -231,14 +238,71 @@ class Timeline {
     current ? current.setState(true) : null;
   }
 
+  /*
+   * Hide elements on mobile view based on content height
+   * */
+  setItemVisibility() {
+    if (window.innerWidth < 690) {
+      let $lastContainer:HTMLElement;
+      let sum = 0
+      let maxHeight = 0;
+      this.$containerElement.items.map((item: TimelineItem) => {
+        if (item.isFirst) {
+          sum = 0;
+          maxHeight = 0;
+
+          const getHeight = ($element: HTMLElement) => $element.clientHeight;
+
+          const sumHeight = (previousValue: any, currentValue: any) => <any>+previousValue + +currentValue;
+
+          maxHeight = <any>item.getSideBarElements().map(getHeight).reduce(sumHeight);
+
+          const parent = item.getParentElement()?.parentElement?.parentElement;
+          $lastContainer = <any>parent;
+
+          console.log(
+              maxHeight,item.getSideBarElements()
+          )
+
+        }else {
+          const parent = item.getParentElement()?.parentElement?.parentElement;
+          if( parent?.isEqualNode($lastContainer) )
+          {
+
+            let $container = <any>item.getParentElement();
+            sum += item.element.clientHeight + 40;
+
+            if ( sum > maxHeight){
+              $container.style.display = 'none';
+              $container.visibility = 0
+            }else {
+              $container.style.display = 'block';
+              $container.visibility = 1
+            }
+          }
+        }
+      });
+    }else {
+      this.$containerElement.items.map((item: TimelineItem) => {
+        let $container = <any>item.getParentElement();
+        $container.style.display = 'block';
+        $container.visibility = 1
+      });
+    }
+  }
+
   setItemColor() {
     var red = 1;
     var green = 107;
     var blue = 183;
     var circleCounter = 0;
     var rowCounter = 0;
-
+    let $parent:any;
     this.$containerElement.items.map((item: TimelineItem) => {
+
+      $parent = item.getParentElement();
+      if($parent.visibility === 0)return;
+
       if (circleCounter % 9 == 0) rowCounter++;
 
       circleCounter++;
@@ -336,7 +400,4 @@ class Timeline {
   }
 }
 
-function handleCircleColor() {
-  if (window.matchMedia("(min-width: 768px)").matches) {
-  }
-}
+

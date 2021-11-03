@@ -137,6 +137,7 @@ var Timeline = /** @class */ (function () {
      * */
     Timeline.prototype.initItems = function () {
         this.$containerElement.items = __spreadArray([], this.$containerElement.querySelectorAll(Timeline.itemSelector)).map(function (v) { return new TimelineItem(v); });
+        this.setItemVisibility();
         this.setItemColor();
     };
     /**
@@ -145,6 +146,10 @@ var Timeline = /** @class */ (function () {
     Timeline.prototype.initListeners = function () {
         var _this = this;
         document.addEventListener("scroll", function (ev) { return _this.handleScroll(ev); });
+        window.addEventListener('resize', function () {
+            _this.setItemVisibility();
+            _this.setItemColor();
+        });
     };
     /**
      * Handle Scroll event
@@ -193,13 +198,62 @@ var Timeline = /** @class */ (function () {
         prev ? prev.setState(false) : null;
         current ? current.setState(true) : null;
     };
+    /*
+     * Hide elements on mobile view based on content height
+     * */
+    Timeline.prototype.setItemVisibility = function () {
+        if (window.innerWidth < 690) {
+            var $lastContainer_1;
+            var sum_1 = 0;
+            var maxHeight_1 = 0;
+            this.$containerElement.items.map(function (item) {
+                var _a, _b, _c, _d;
+                if (item.isFirst) {
+                    sum_1 = 0;
+                    maxHeight_1 = 0;
+                    var getHeight = function ($element) { return $element.clientHeight; };
+                    var sumHeight = function (previousValue, currentValue) { return +previousValue + +currentValue; };
+                    maxHeight_1 = item.getSideBarElements().map(getHeight).reduce(sumHeight);
+                    var parent_1 = (_b = (_a = item.getParentElement()) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.parentElement;
+                    $lastContainer_1 = parent_1;
+                    console.log(maxHeight_1, item.getSideBarElements());
+                }
+                else {
+                    var parent_2 = (_d = (_c = item.getParentElement()) === null || _c === void 0 ? void 0 : _c.parentElement) === null || _d === void 0 ? void 0 : _d.parentElement;
+                    if (parent_2 === null || parent_2 === void 0 ? void 0 : parent_2.isEqualNode($lastContainer_1)) {
+                        var $container = item.getParentElement();
+                        sum_1 += item.element.clientHeight + 40;
+                        if (sum_1 > maxHeight_1) {
+                            $container.style.display = 'none';
+                            $container.visibility = 0;
+                        }
+                        else {
+                            $container.style.display = 'block';
+                            $container.visibility = 1;
+                        }
+                    }
+                }
+            });
+        }
+        else {
+            this.$containerElement.items.map(function (item) {
+                var $container = item.getParentElement();
+                $container.style.display = 'block';
+                $container.visibility = 1;
+            });
+        }
+    };
     Timeline.prototype.setItemColor = function () {
         var red = 1;
         var green = 107;
         var blue = 183;
         var circleCounter = 0;
         var rowCounter = 0;
+        var $parent;
         this.$containerElement.items.map(function (item) {
+            $parent = item.getParentElement();
+            if ($parent.visibility === 0)
+                return;
             if (circleCounter % 9 == 0)
                 rowCounter++;
             circleCounter++;
@@ -286,7 +340,3 @@ var Timeline = /** @class */ (function () {
     Timeline.itemSelector = ".bubble";
     return Timeline;
 }());
-function handleCircleColor() {
-    if (window.matchMedia("(min-width: 768px)").matches) {
-    }
-}
