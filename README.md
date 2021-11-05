@@ -5,8 +5,11 @@ https://onebyte.github.io/barbara-keller.ch-timeline/
 
 in development
 
+HTML:
+```
+```
 
-Integration:
+JS Integration:
 ```
  new Timeline(
        '#timeline-1', options = {}
