@@ -1,8 +1,8 @@
 class TimeLineCollusionRanger {
   static triggerPoint = {
     height: 90,
-    top: (()=>{
-      return window.innerWidth < 690 ? 500 : 400
+    top: (() => {
+      return window.innerWidth < 690 ? 500 : 400;
     })(),
     drawRanger: false,
   };
@@ -15,7 +15,7 @@ class TimeLineCollusionRanger {
 
   constructor(t: Timeline) {
     this.drawRanger();
-    console.log(TimeLineCollusionRanger.triggerPoint.top)
+    console.log(TimeLineCollusionRanger.triggerPoint.top);
   }
 
   protected drawRanger() {
@@ -82,7 +82,6 @@ class TimelineItem {
   isActivated = true;
 
   state = false;
-  item: any;
 
   constructor(private $item: HTMLElement) {
     this.initListeners();
@@ -94,7 +93,6 @@ class TimelineItem {
   }
 
   initListeners() {
-
     // animation
     this.$item.ontransitionend = (ev) => {
       this.isActivated = this.$item.classList.contains("active");
@@ -104,17 +102,19 @@ class TimelineItem {
     };
 
     // image
-    const parent:any = this.getParentElement();
-    const imgs = [ ... parent.parentElement.parentElement.querySelectorAll('.timeline-item-content--images img')];
-    imgs.map(
-        $img =>{
-          if(!$img.dataset.listener){
-            $img.dataset.listener = $img.addEventListener('click', (ev:any)=>
-            this.ON.click.image(this,ev))
-          }
-        }
-
-    )
+    const parent: any = this.getParentElement();
+    const imgs = [
+      ...parent.parentElement.parentElement.querySelectorAll(
+        ".timeline-item-content--images img"
+      ),
+    ];
+    imgs.map(($img) => {
+      if (!$img.dataset.listener) {
+        $img.dataset.listener = $img.addEventListener("click", (ev: any) =>
+          this.ON.click.image(this, ev)
+        );
+      }
+    });
   }
 
   getParentElement() {
@@ -147,10 +147,10 @@ class TimelineItem {
   }
 
   ON = {
-    click:{
-      image:(item:TimelineItem,ev:any):any => null
-    }
-  }
+    click: {
+      image: (item: TimelineItem, ev: any): any => null,
+    },
+  };
 }
 
 class Timeline {
@@ -170,7 +170,6 @@ class Timeline {
 
     this.initListeners();
   }
-
 
   private initContainer() {
     if (typeof (<any>this.$containerElement) === "string") {
@@ -200,25 +199,25 @@ class Timeline {
    * Adding Dom Listeners
    * */
   protected initListeners() {
-
     /**Global*/
     document.addEventListener("scroll", (ev) => this.handleScroll(ev));
-    window.addEventListener('resize',() => {
+    window.addEventListener("resize", () => {
       this.setItemVisibility();
       this.setItemColor();
     });
 
     /*Item based*/
-    this.$containerElement.items.forEach((item:TimelineItem) =>
-        item.ON.click.image = (item:TimelineItem,ev:any) =>
-            this.handleItemImageClick(item,ev))
+    this.$containerElement.items.forEach(
+      (item: TimelineItem) =>
+        (item.ON.click.image = (item: TimelineItem, ev: any) =>
+          this.handleItemImageClick(item, ev))
+    );
   }
 
   /**
    * Handle Scroll event
    * */
   protected handleScroll(ev: Event) {
-
     this.lineRanger.collusionsMapper.hasCollusion = false;
     let found = null;
     for (let i = 0; i < this.$containerElement.items.length; i++) {
@@ -250,10 +249,30 @@ class Timeline {
     this.setItemClasses();
   }
 
-  protected handleItemImageClick(item:TimelineItem,ev:any){
-    console.log(
-        item
-    )
+  protected handleItemImageClick(item: TimelineItem, ev: any) {
+
+    /*
+     * Show Modal
+     * */
+    const doc = document.createDocumentFragment();
+    const container = document.createElement("div");
+    container.classList.add("image-slider-container");
+
+    const closeBtn = document.createElement("div");
+    closeBtn.classList.add('image-slider-container--close')
+    closeBtn.innerHTML = '<a>X</a>';
+
+    const img = document.createElement("img");
+    img.src = ev.target.src;
+
+    [closeBtn, img].forEach((el) => container.append(el));
+
+    doc.append(container);
+    document.body.append(doc);
+
+    closeBtn.addEventListener('click', ()=>
+      document.querySelectorAll(".image-slider-container")
+          .forEach(el => el.remove()));
   }
 
   protected canTriggerSlideContent(item: TimelineItem): boolean {
@@ -282,8 +301,8 @@ class Timeline {
    * */
   public setItemVisibility() {
     if (window.innerWidth < 690) {
-      let $lastContainer:HTMLElement;
-      let sum = 0
+      let $lastContainer: HTMLElement;
+      let sum = 0;
       let maxHeight = 0;
       this.$containerElement.items.map((item: TimelineItem) => {
         if (item.isFirst) {
@@ -292,40 +311,38 @@ class Timeline {
 
           const getHeight = ($element: HTMLElement) => $element.clientHeight;
 
-          const sumHeight = (previousValue: any, currentValue: any) => <any>+previousValue + +currentValue;
+          const sumHeight = (previousValue: any, currentValue: any) =>
+            <any>+previousValue + +currentValue;
 
-          maxHeight = <any>item.getSideBarElements().map(getHeight).reduce(sumHeight);
+          maxHeight = <any>(
+            item.getSideBarElements().map(getHeight).reduce(sumHeight)
+          );
 
           const parent = item.getParentElement()?.parentElement?.parentElement;
           $lastContainer = <any>parent;
 
-          console.log(
-              maxHeight,item.getSideBarElements()
-          )
-
-        }else {
+          console.log(maxHeight, item.getSideBarElements());
+        } else {
           const parent = item.getParentElement()?.parentElement?.parentElement;
-          if( parent?.isEqualNode($lastContainer) )
-          {
-
+          if (parent?.isEqualNode($lastContainer)) {
             let $container = <any>item.getParentElement();
             sum += item.element.clientHeight + 40;
 
-            if ( sum > maxHeight){
-              $container.style.display = 'none';
-              $container.visibility = 0
-            }else {
-              $container.style.display = 'block';
-              $container.visibility = 1
+            if (sum > maxHeight) {
+              $container.style.display = "none";
+              $container.visibility = 0;
+            } else {
+              $container.style.display = "block";
+              $container.visibility = 1;
             }
           }
         }
       });
-    }else {
+    } else {
       this.$containerElement.items.map((item: TimelineItem) => {
         let $container = <any>item.getParentElement();
-        $container.style.display = 'block';
-        $container.visibility = 1
+        $container.style.display = "block";
+        $container.visibility = 1;
       });
     }
   }
@@ -336,11 +353,10 @@ class Timeline {
     var blue = 183;
     var circleCounter = 0;
     var rowCounter = 0;
-    let $parent:any;
+    let $parent: any;
     this.$containerElement.items.map((item: TimelineItem) => {
-
       $parent = item.getParentElement();
-      if($parent.visibility === 0)return;
+      if ($parent.visibility === 0) return;
 
       if (circleCounter % 9 == 0) rowCounter++;
 
@@ -438,3 +454,8 @@ class Timeline {
     });
   }
 }
+
+((/* Auto Init */) =>
+  document
+    .querySelectorAll('div[data-timeline="true"]')
+    .forEach((el) => new Timeline(el)))();

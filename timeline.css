@@ -313,3 +313,43 @@
     font-size: 50% !important;
   }
 }
+
+
+/**TimeSlider Image Slider*/
+.image-slider-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: #3131318a;
+  z-index: 1002;
+  animation: fadeIn 1s;
+}
+
+.image-slider-container img{
+  max-width: 90vw;
+  max-height: 90vh;
+
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.image-slider-container--close{
+  position: absolute;
+  right: 0;
+  top: 13px;
+  width: 35px;
+  height: 30px;
+  color: #e7e7e7;
+  font-size: 34px;
+  cursor: pointer;
+}
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}

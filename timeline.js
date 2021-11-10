@@ -75,8 +75,8 @@ var TimelineItem = /** @class */ (function () {
         this.state = false;
         this.ON = {
             click: {
-                image: function (item, ev) { return null; }
-            }
+                image: function (item, ev) { return null; },
+            },
         };
         this.initListeners();
         this.isFirst = !((_a = $item.parentElement) === null || _a === void 0 ? void 0 : _a.previousElementSibling);
@@ -99,10 +99,10 @@ var TimelineItem = /** @class */ (function () {
         };
         // image
         var parent = this.getParentElement();
-        var imgs = __spreadArray([], parent.parentElement.parentElement.querySelectorAll('.timeline-item-content--images img'));
+        var imgs = __spreadArray([], parent.parentElement.parentElement.querySelectorAll(".timeline-item-content--images img"));
         imgs.map(function ($img) {
             if (!$img.dataset.listener) {
-                $img.dataset.listener = $img.addEventListener('click', function (ev) {
+                $img.dataset.listener = $img.addEventListener("click", function (ev) {
                     return _this.ON.click.image(_this, ev);
                 });
             }
@@ -166,15 +166,15 @@ var Timeline = /** @class */ (function () {
         var _this = this;
         /**Global*/
         document.addEventListener("scroll", function (ev) { return _this.handleScroll(ev); });
-        window.addEventListener('resize', function () {
+        window.addEventListener("resize", function () {
             _this.setItemVisibility();
             _this.setItemColor();
         });
         /*Item based*/
         this.$containerElement.items.forEach(function (item) {
-            return item.ON.click.image = function (item, ev) {
+            return (item.ON.click.image = function (item, ev) {
                 return _this.handleItemImageClick(item, ev);
-            };
+            });
         });
     };
     /**
@@ -211,7 +211,24 @@ var Timeline = /** @class */ (function () {
         this.setItemClasses();
     };
     Timeline.prototype.handleItemImageClick = function (item, ev) {
-        console.log(item);
+        /*
+         * Show Modal
+         * */
+        var doc = document.createDocumentFragment();
+        var container = document.createElement("div");
+        container.classList.add("image-slider-container");
+        var closeBtn = document.createElement("div");
+        closeBtn.classList.add('image-slider-container--close');
+        closeBtn.innerHTML = '<a>X</a>';
+        var img = document.createElement("img");
+        img.src = ev.target.src;
+        [closeBtn, img].forEach(function (el) { return container.append(el); });
+        doc.append(container);
+        document.body.append(doc);
+        closeBtn.addEventListener('click', function () {
+            return document.querySelectorAll(".image-slider-container")
+                .forEach(function (el) { return el.remove(); });
+        });
     };
     Timeline.prototype.canTriggerSlideContent = function (item) {
         return (item.isFirst && !item.isInView && this.lineRanger.itemIsInView(item, true));
@@ -241,8 +258,10 @@ var Timeline = /** @class */ (function () {
                     sum_1 = 0;
                     maxHeight_1 = 0;
                     var getHeight = function ($element) { return $element.clientHeight; };
-                    var sumHeight = function (previousValue, currentValue) { return +previousValue + +currentValue; };
-                    maxHeight_1 = item.getSideBarElements().map(getHeight).reduce(sumHeight);
+                    var sumHeight = function (previousValue, currentValue) {
+                        return +previousValue + +currentValue;
+                    };
+                    maxHeight_1 = (item.getSideBarElements().map(getHeight).reduce(sumHeight));
                     var parent_1 = (_b = (_a = item.getParentElement()) === null || _a === void 0 ? void 0 : _a.parentElement) === null || _b === void 0 ? void 0 : _b.parentElement;
                     $lastContainer_1 = parent_1;
                     console.log(maxHeight_1, item.getSideBarElements());
@@ -253,11 +272,11 @@ var Timeline = /** @class */ (function () {
                         var $container = item.getParentElement();
                         sum_1 += item.element.clientHeight + 40;
                         if (sum_1 > maxHeight_1) {
-                            $container.style.display = 'none';
+                            $container.style.display = "none";
                             $container.visibility = 0;
                         }
                         else {
-                            $container.style.display = 'block';
+                            $container.style.display = "block";
                             $container.visibility = 1;
                         }
                     }
@@ -267,7 +286,7 @@ var Timeline = /** @class */ (function () {
         else {
             this.$containerElement.items.map(function (item) {
                 var $container = item.getParentElement();
-                $container.style.display = 'block';
+                $container.style.display = "block";
                 $container.visibility = 1;
             });
         }
@@ -369,3 +388,8 @@ var Timeline = /** @class */ (function () {
     Timeline.itemSelector = ".bubble";
     return Timeline;
 }());
+(function ( /* Auto Init */) {
+    return document
+        .querySelectorAll('div[data-timeline="true"]')
+        .forEach(function (el) { return new Timeline(el); });
+})();
