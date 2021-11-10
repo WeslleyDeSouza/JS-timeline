@@ -7,6 +7,7 @@ in development
 
 HTML:
 ```
+
 ```
 
 JS Integration:
@@ -16,5 +17,12 @@ JS Integration:
     )
 
 ```
+
+HTML Integration:
+```
+data-timeline="true"
+```
+
+ 
 
 options:
