@@ -1,6 +1,20 @@
 Simple timeLine in JS / HTML
 
 demo:
-https://weslleydesouza.github.io/JS-timeline/
+https://onebyte.github.io/barbara-keller.ch-timeline/
 
 in development
+
+HTML:
+```
+```
+
+JS Integration:
+```
+ new Timeline(
+       '#timeline-1', options = {}
+    )
+
+```
+
+options:
