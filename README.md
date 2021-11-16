@@ -1,7 +1,7 @@
 Simple timeLine in JS / HTML
 
 demo:
-https://onebyte.github.io/barbara-keller.ch-timeline/
+https://weslleydesouza.github.io/JS-timeline/
 
 in development
 
