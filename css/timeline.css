@@ -304,7 +304,6 @@
     width: 40px;
     height: 40px;
   }
-
   .contentLeft .timeline-item-heading .timeline-item-heading--arrow-end {
     position: absolute;
     top: 0;
@@ -326,6 +325,16 @@
   .timeline-sidebar {
     width: 100%;
     order: 2;
+  }
+  .timeline-item{
+    max-width: 305px;
+    margin-right: 5px;
+    float: right;
+    margin-bottom: 30px;
+  }
+  .timeline-item h2{
+    white-space: nowrap;
+    font-size: 120%;
   }
   .timeline-item-heading--arrow-end{
     display: none;
