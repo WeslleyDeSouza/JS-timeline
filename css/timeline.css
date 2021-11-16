@@ -322,11 +322,12 @@
   }
 }
 @media (max-width: 390px) {
+
   .timeline-sidebar {
     width: 100%;
     order: 2;
   }
-  .timeline-item{
+  .timeline-item {
     max-width: 305px;
     margin-right: 5px;
     float: right;
@@ -336,12 +337,14 @@
     white-space: nowrap;
     font-size: 120%;
   }
-  .timeline-item-heading--arrow-end{
+
+  .timeline-item-heading--arrow-end {
     display: none;
   }
-  .timeline-sidebar:empty{
+  .timeline-sidebar:empty {
     display: none;
   }
+
   .bubble {
     width: 30px;
     height: 30px;
