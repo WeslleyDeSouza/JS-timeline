@@ -1,3 +1,7 @@
+
+/**
+ * Detect collusion from a given range (TriggerProints)
+ * */
 class TimeLineCollusionRanger {
   static triggerPoint = {
     height: 90,
@@ -7,27 +11,30 @@ class TimeLineCollusionRanger {
     drawRanger: false,
   };
 
-  collusionsMapper = {
-    hasCollusion: false,
-    current: <TimelineItem | null>null,
-    prev: <TimelineItem | null>null,
+  public collusionsMapper = {
+    hasCollusion: false, // item is inside mapper
+    current: <TimelineItem | null>null,  // current item inside mapper
+    prev: <TimelineItem | null>null, // prev item inside mapper
   };
 
-  constructor(t: Timeline) {
-    this.drawRanger();
-    console.log(TimeLineCollusionRanger.triggerPoint.top);
+  constructor( ) {
+    this.drawVisibleRanger();
   }
 
-  protected drawRanger() {
+  protected drawVisibleRanger() {
     if (
-      !TimeLineCollusionRanger.triggerPoint.drawRanger ||
-      document.querySelector(".timeline-ranger-helper")
+        !TimeLineCollusionRanger.triggerPoint.drawRanger ||
+        document.querySelector(".timeline-ranger-helper")
     )
       return;
     const $div = document.createElement("div");
     const points = TimeLineCollusionRanger.triggerPoint;
     $div.innerHTML = `<div style="opacity: 0.1;position: fixed;top: ${points.top}px;height: ${points.height}px;width: 100%;background: #ff2b2b" class="timeline-ranger-helper"></div>`;
     document.body.appendChild($div);
+  }
+
+  public hasCollusion(){
+    return this.collusionsMapper.hasCollusion;
   }
 
   /**
@@ -38,15 +45,15 @@ class TimeLineCollusionRanger {
     const range = TimeLineCollusionRanger;
 
     const { top, height } = (<HTMLElement>(
-      item.getParentElement()
+        item.getParentElement()
     )).getBoundingClientRect();
 
     const isInsideTop =
-      top > range.triggerPoint.top &&
-      top < range.triggerPoint.top + range.triggerPoint.height;
+        top > range.triggerPoint.top &&
+        top < range.triggerPoint.top + range.triggerPoint.height;
     const isInsideBottom =
-      top + height > range.triggerPoint.top &&
-      top + height < range.triggerPoint.top + range.triggerPoint.height;
+        top + height > range.triggerPoint.top &&
+        top + height < range.triggerPoint.top + range.triggerPoint.height;
 
     if (isInsideTop || isInsideBottom) {
       return true;
@@ -60,7 +67,7 @@ class TimeLineCollusionRanger {
    * */
   itemIsInView(item: TimelineItem, setValue = true) {
     const { top, height } = (<HTMLElement>(
-      item.getParentElement()
+        item.getParentElement()
     )).getBoundingClientRect();
 
     if (setValue) {
@@ -71,6 +78,7 @@ class TimeLineCollusionRanger {
     }
   }
 }
+/*-------------------------------------------------------------------------------*/
 
 class TimelineItem {
   /* Is the first child element from the container  */
@@ -105,13 +113,13 @@ class TimelineItem {
     const parent: any = this.getParentElement();
     const imgs = [
       ...parent.parentElement.parentElement.querySelectorAll(
-        ".timeline-item-content--images img"
+          ".timeline-item-content--images img"
       ),
     ];
     imgs.map(($img) => {
       if (!$img.dataset.listener) {
         $img.dataset.listener = $img.addEventListener("click", (ev: any) =>
-          this.ON.click.image(this, ev)
+            this.ON.click.image(this, ev)
         );
       }
     });
@@ -125,9 +133,9 @@ class TimelineItem {
     if (this.isFirst) {
       return [
         ...(<any>(
-          this.getParentElement()?.parentElement?.parentElement?.querySelectorAll(
-            ".timeline-item"
-          )
+            this.getParentElement()?.parentElement?.parentElement?.querySelectorAll(
+                ".timeline-item"
+            )
         )),
       ];
     }
@@ -152,18 +160,19 @@ class TimelineItem {
     },
   };
 }
+/*-------------------------------------------------------------------------------*/
 
 class Timeline {
+
   static itemSelector = ".bubble";
 
-  protected lineRanger = new TimeLineCollusionRanger(this);
+  protected lineRanger = new TimeLineCollusionRanger();
 
-  constructor(protected $containerElement: any /*HTMLElement*/) {
+  constructor(protected $containerElement: any) {
     this.inti();
   }
 
   protected inti() {
-    //Todo: wait till dom is ready
     this.initContainer();
 
     this.initItems();
@@ -454,8 +463,6 @@ class Timeline {
     });
   }
 }
+/*-------------------------------------------------------------------------------*/
 
-((/* Auto Init */) =>
-  document
-    .querySelectorAll('div[data-timeline="true"]')
-    .forEach((el) => new Timeline(el)))();
+((/* Auto Init */) => document.querySelectorAll('div[data-timeline="true"]').forEach((el) => new Timeline(el)))();

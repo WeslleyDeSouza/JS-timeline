@@ -148,6 +148,20 @@
   -moz-box-shadow: 2px 2px 17px -3px rgba(97, 97, 97, 1);
   box-shadow: 2px 2px 17px -3px rgb(97 97 97);
 }
+
+.timeline-item-content h1,
+.timeline-item-content h2,
+.timeline-item-content h3 {
+  margin: 0;
+  color: white;
+  font-size: 23px;
+  line-height: 23px;
+}
+
+
+.timeline-item-content--up{
+  margin-top: -35px;
+}
 .timeline-item-content img {
   max-width: 20%;
   cursor: pointer;
@@ -159,6 +173,9 @@
 .contentRight .timeline-item-content {
   margin-right: 20px;
   width: 80%;
+}
+.timeline-item-content .text-white{
+  color: white;
 }
 
 /*Mobile*/
@@ -307,8 +324,14 @@
 }
 @media (max-width: 390px) {
   .timeline-sidebar {
-    width: 70%;
+    width: 100%;
     order: 2;
+  }
+  .timeline-item-heading--arrow-end{
+    display: none;
+  }
+  .timeline-sidebar:empty{
+    display: none;
   }
   .bubble {
     width: 30px;
