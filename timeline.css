@@ -229,11 +229,6 @@
   }
   
 
-.start-right .bubble-container:nth-child(1) .bubble   .bubble-inner {
-    width: 96%;
-    height: 96%;
-  }
-
   .start-right .bubble-container:nth-child(1) .bubble {
     margin-left: 96%;
   }
