@@ -5,6 +5,13 @@
     <title> Smooth Timeline Animation </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="timeline.css">
+    <style>
+        @media (max-width: 600px)  {
+            .m-hide{
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -15,11 +22,12 @@
     <p>
         ( Scroll down )
     </p>
+    <br>
 </div>
 
 <div class="container" style="margin: auto;">
     <div class="full-page">
-        <div style="height: 500px"></div>
+        <div style="height: 500px" class="m-hide"></div>
         <div data-timeline="true" id="timeline-1" >
             <div class="timeline-flex">
                 <div class="timeline-sidebar"></div>

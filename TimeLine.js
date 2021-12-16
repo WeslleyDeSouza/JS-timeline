@@ -62,7 +62,7 @@ var TimeLineCollusionRanger = /** @class */ (function () {
     TimeLineCollusionRanger.triggerPoint = {
         height: 90,
         top: (function () {
-            return window.innerWidth < 690 ? 500 : 400;
+            return window.innerWidth < 690 ? 150 : 400;
         })(),
         drawRanger: false,
     };

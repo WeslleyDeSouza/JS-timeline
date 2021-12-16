@@ -286,6 +286,12 @@
   }
 }
 @media (max-width: 690px) {
+
+  .timeline-item-content h1, .timeline-item-content h2, .timeline-item-content h3 {
+    font-size: 21px;
+    line-height: 19px;
+  }
+
   .timeline-flex {
     flex-wrap: wrap;
     justify-content: space-between;
@@ -305,6 +311,11 @@
     width: 40px;
     height: 40px;
   }
+
+  .start-left,.start-right{
+    margin-top: -20px;
+  }
+
   .contentLeft .timeline-item-heading .timeline-item-heading--arrow-end {
     position: absolute;
     top: 0;
@@ -317,10 +328,20 @@
     right: 7px;
     left: initial;
   }
+
+  .contentContainer{
+    padding-bottom: 60px;
+  }
+
   .timeline-item-content {
+    min-height: 150px;
     margin-right: 20px;
     width: 90%;
   }
+  .timeline-item-content--up {
+    margin-top: -29px;
+  }
+
 }
 @media (max-width: 390px) {
   .timeline-sidebar {
@@ -353,7 +374,23 @@
     font-size: 50% !important;
   }
 }
+@media (max-width: 320px) {
+  .start-left, .start-right {
+    margin-top: -15px;
+  }
 
+  .timeline-item h2 {
+    white-space: nowrap;
+    font-size: 100%;
+  }
+  .timeline-item {
+    max-width: 250px;
+
+  }
+  .timeline-item-content{
+    width: 87%;
+  }
+}
 
 /**TimeSlider Image Slider*/
 .image-slider-container{
