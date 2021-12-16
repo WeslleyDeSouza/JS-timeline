@@ -336,7 +336,7 @@
   .timeline-item-content {
     min-height: 150px;
     margin-right: 20px;
-    width: 90%;
+    width: 90% !important;
   }
   .timeline-item-content--up {
     margin-top: -29px;
@@ -388,7 +388,7 @@
 
   }
   .timeline-item-content{
-    width: 87%;
+    width: 87% !important;
   }
 }
 
